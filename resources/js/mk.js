@@ -1,0 +1,3 @@
+function pr(){
+    alert ("pr");
+}
