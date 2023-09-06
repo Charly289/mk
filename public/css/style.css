@@ -1,0 +1,31 @@
+
+.border{
+    border-style: groove;
+
+}
+
+.col_der{
+    
+    border-style: groove;
+
+}
+
+.col_cen{
+    
+    border-style: groove;
+
+}
+
+.col_izq{
+    
+    border-style: groove;
+
+}
+.container {
+  display: grid;
+  grid-template-columns: auto auto auto auto;
+  grid-gap: 10px;
+  background-color: #2196F3;
+  padding: 10px;
+  grid-template-rows: auto 150px auto;
+}
