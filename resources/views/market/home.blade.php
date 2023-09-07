@@ -10,11 +10,26 @@
     <body>
       <div class="border">He</div>
 
-              <div class="container border">
+              <div class="container border ">
                       <div class="col_izq">1</div>
-                      <div class="col_cen">2</div>
+                      <div class="col_cen">2
+                        {{-- Inicia Form --}}
+                        <form>
+                          <label >Nombre</label>
+                          <input type="text">
+
+                          <label>Descripcion</label>
+                          <input type="text">
+
+                          <label>Cantidad</label>
+                          <input type="text">
+
+                          <label>Precio</label>
+                          <input type="text">
+                        </form>
+                         {{-- Termina Form --}}
+                      </div>
                       <div class="col_cen">3</div>
-                      <div class="col_der">4</div>
               </div>               
         <div class="border">Fo</div>
     </body>    
