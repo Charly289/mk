@@ -25,7 +25,35 @@
   display: grid;
   grid-template-columns: auto auto auto;
   grid-gap: 10px;
-  background-color: gray;
+  background-color: black;
   padding: 10px;
   grid-template-rows: auto 150px auto;
+}
+.div_form{
+    border-style: groove;
+    width: 200px;
+    margin: auto;  
+    padding: 20 20;
+}
+.button_form{
+    width: 200px;
+    padding-top: 20px;
+}
+.label_form{
+    color:aliceblue;
+    text-align:center;
+}
+.header{
+    border-style: groove;
+    height: 77px;
+}
+.footer{
+    border-style: groove;
+    height: 76px;
+}
+.img{
+    width: 100px;
+    margin-left: 290px;
+    padding-bottom:20px ;
+   
 }

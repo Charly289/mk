@@ -8,29 +8,47 @@
       <link  href="{{ asset('/css/style.css') }}" rel="stylesheet" />
     </head>
     <body>
-      <div class="border">He</div>
+      <div class="header">He</div>
 
               <div class="container border ">
                       <div class="col_izq">1</div>
                       <div class="col_cen">2
                         {{-- Inicia Form --}}
                         <form>
-                          <label >Nombre</label>
-                          <input type="text">
+                          <div>
+                            <img src="{{asset('/img/logo.png')}} " class="img">
+                          </div>
+                          <div class="div_form label_form">
+                            <div>
+                              <label class="form-label ">Nombre</label>
+                              <input type="text" class="form-control">
+                            </div>                          
+                              <div >
+                                <label class="form-label">Descripcion</label>
+                                <input type="text" class="form-control">
+                              </div>
+                          
+                            <div >
+                              <label class="form-label">Cantidad</label>
+                              <input type="text" class="form-control">
+                            </div>                          
+  
+                            <div >
+                              <label class="form-label">Precio</label>
+                              <input type="text" class="form-control">
+                            </div>
+                          </div>
+                          <div class="d-grid gap-2 col-6 mx-auto button_form">
 
-                          <label>Descripcion</label>
-                          <input type="text">
+                          <button type="submit" class="btn btn-primary " onclick="pr()">Agregar</button>
 
-                          <label>Cantidad</label>
-                          <input type="text">
-
-                          <label>Precio</label>
-                          <input type="text">
+                            </div>
+                            
                         </form>
                          {{-- Termina Form --}}
                       </div>
                       <div class="col_cen">3</div>
               </div>               
-        <div class="border">Fo</div>
+        <div class="footer">Fo</div>
     </body>    
 </html>
