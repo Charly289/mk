@@ -20,7 +20,7 @@
                           </div>
                           <div class="div_form label_form">
                             <div>
-                              <label class="form-label ">Nombre</label>
+                              <label class="form-label ">Producto</label>
                               <input type="text" class="form-control">
                             </div>                          
                               <div >
@@ -39,10 +39,8 @@
                             </div>
                           </div>
                           <div class="d-grid gap-2 col-6 mx-auto button_form">
-
                           <button type="submit" class="btn btn-primary " onclick="pr()">Agregar</button>
-
-                            </div>
+                          </div>
                             
                         </form>
                          {{-- Termina Form --}}

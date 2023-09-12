@@ -26,8 +26,9 @@
   grid-template-columns: auto auto auto;
   grid-gap: 10px;
   background-color: black;
-  padding: 10px;
-  grid-template-rows: auto 100px auto;
+  padding-bottom: 10px;
+padding-top: 10px;  
+  grid-template-rows: auto auto auto;
 }
 .div_form{
     border-style: groove;
@@ -45,11 +46,11 @@
 }
 .header{
     border-style: groove;
-    height: 77px;
+    height: 30px;
 }
 .footer{
     border-style: groove;
-    height: 76px;
+    height: 28px;
 }
 .img{
 width: 100px;
