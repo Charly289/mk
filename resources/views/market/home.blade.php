@@ -15,7 +15,7 @@
                       <div class="col_cen">2
                         {{-- Inicia Form --}}
                         <form>
-                          <div>
+                          <div class="img_box">
                             <img src="{{asset('/img/logo.png')}} " class="img">
                           </div>
                           <div class="div_form label_form">
