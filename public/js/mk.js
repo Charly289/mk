@@ -7,7 +7,6 @@ function add_producto(){
     });
     
 
-    console.log(form_data);
     
     
 }
