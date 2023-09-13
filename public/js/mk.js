@@ -1,3 +1,13 @@
-function pr(){
-    alert ("pr");
+
+function add_producto(){
+
+    var form_data = document.getElementById("form_data");
+    document.getElementById("nombre").addEventListener("click", function(){
+        form_data.onsubmit();
+    });
+    
+
+    console.log(form_data);
+    
+    
 }

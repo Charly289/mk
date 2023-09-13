@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\productoController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,6 +17,13 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('market/home');
 });
+
+Route::post('/registrar/productos', [productoController::class, 'registrer_producto'])->name('registrar');
+
+Route::get('prueba',function(){
+    return "prueba25";
+});
+
 
 Route::middleware([
     'auth:sanctum',
