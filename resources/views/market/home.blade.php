@@ -16,14 +16,24 @@
                       <div class="col_izq">1</div>
                       <div class="col_cen">2
                         {{-- Inicia Form --}}
+<<<<<<< HEAD
                         <form action="" name="form_data" id="form_data">
                           <div>
+=======
+                        <form>
+                          <div class="img_box">
+>>>>>>> 85162de743e6503d37909868947bb433508e5df0
                             <img src="{{asset('/img/logo.png')}} " class="img">
                           </div>
                           <div class="div_form label_form">
                             <div>
+<<<<<<< HEAD
                               <label class="form-label ">Nombre</label>
                               <input type="text" class="form-control" id="nombre" name="nombre" value="">
+=======
+                              <label class="form-label ">Producto</label>
+                              <input type="text" class="form-control">
+>>>>>>> 85162de743e6503d37909868947bb433508e5df0
                             </div>                          
                               <div >
                                 <label class="form-label">Descripcion</label>
@@ -41,11 +51,16 @@
                             </div>
                           </div>
                           <div class="d-grid gap-2 col-6 mx-auto button_form">
+<<<<<<< HEAD
 
                           
 
                             </div>
                             <button type="submit" class="btn btn-primary " onclick="add_producto(form_data)">Agregar</button>
+=======
+                          <button type="submit" class="btn btn-primary " onclick="pr()">Agregar</button>
+                          </div>
+>>>>>>> 85162de743e6503d37909868947bb433508e5df0
                             
                         </form>
                          {{-- Termina Form --}}
