@@ -18,12 +18,7 @@ Route::get('/', function () {
     return view('market/home');
 });
 
-Route::post('/registrar/productos', [productoController::class, 'registrer_producto'])->name('registrar');
-
-Route::get('prueba',function(){
-    return "prueba25";
-});
-
+Route::post('registrar', [productoController::class, 'registrer_producto'])->name('registrar');
 
 Route::middleware([
     'auth:sanctum',

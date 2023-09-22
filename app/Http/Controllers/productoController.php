@@ -6,22 +6,16 @@ use App\Http\Controllers\productoController;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Models\products;
+use Response;
 
 class productoController extends Controller
 {
-    function registrer_producto(){
-   
-        $nombre=$_POST['nombre'];
-        $descripcion=$_POST['descripcion'];
-        $cantidad=$_POST['cantidad'];
-        $precio=$_POST['precio'];
+    function registrer_producto(Request $request ){
 
 
-
+        return Response::json(['rec'=>"1526"]);
         
-
-        /*DB:table('productos')->insert([
-            'nombre'=>$nombre,'descripcion'=>$descripcion,'cantidad'=>$cantidad]);*/
+   
 
     }
     
