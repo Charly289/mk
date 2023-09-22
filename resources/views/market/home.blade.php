@@ -1,7 +1,7 @@
 
 <html>
     <head>
-
+      <meta name="csrf-token" content="{{ csrf_token() }}">
       <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
       <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
@@ -61,31 +61,38 @@
         <div class="footer">Fo</div>
     </body>  
 
-    <script type="text/javascript">
+    <script type="text/javascript">     
 
+            let registrar = "{{route('registrar')}}";        
+            let producto = document.getElementById('producto').value;
+            let descripcion = document.getElementById('descripcion').value;
+            let cantidad = document.getElementById('cantidad').value;
+            let precio = document.getElementById('precio').value;
+            let form_data = producto+descripcion+cantidad+precio;
 
-function add_form(){
+          let prueba=1;
 
-  let registrar = "{{route('registrar')}}";
-  
-      var producto = document.getElementById('producto').value;
-      var descripcion = document.getElementById('descripcion').value;
-      var cantidad = document.getElementById('cantidad').value;
-      var precio = document.getElementById('precio').value;
-
-    var form_data = producto+descripcion+cantidad+precio;
-    
     $.ajax({
-      type:'POST',
-      url:registrar,
-      data:{_token:"{{Session::token()}}"},
-      datatype:"text",
-      success:function(resultData){
-        console.log(resultData);
-      }
-    });
-        
- }  
-      
+      headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+             
+              url:registrar,
+              data:{prueba},
+              type:'POST',
+              datatype:'json',
+              success:function(resultData){
+                console.log(resultData);
+              },
+              statusCode: {
+                  404: function() {
+                     alert('web not found');
+                  }
+               },
+               error:function(x,xs,xt){
+                  window.open(JSON.stringify(x));
+               }
+            });   
+          
     </script>
     </html>
