@@ -13,13 +13,12 @@
     </head>
     <body>
       <div class="header">He</div>
-
               <div class="container border ">
                       <div class="col_izq">1</div>
                       <div class="col_cen">2
                         {{-- Inicia Form --}}
 
-                        <form  id="form_data"  name="form_data">
+                        <form  id="form_data"  name="form_data" action="">
                           <div>                        
                           <div class="img_box">
 
@@ -29,28 +28,26 @@
                             <div>
 
                               <label class="form-label ">Producto</label>
-                              <input type="text" class="form-control" id="producto" name="producto" value=""> 
+                              <input type="text" class="form-control" id="producto" name="producto"> 
 
                             </div>                          
                               <div >
                                 <label class="form-label">Descripcion</label>
-                                <input type="text" class="form-control" id="descripcion" name="descripcion" value="">
+                                <input type="text" class="form-control" id="descripcion" name="descripcion">
                               </div>
                           
                             <div >
                               <label class="form-label">Cantidad</label>
-                              <input type="text" class="form-control" id="cantidad" name="cantidad" value="">
+                              <input type="text" class="form-control" id="cantidad" name="cantidad">
                             </div>                          
   
                             <div >
                               <label class="form-label">Precio</label>
-                              <input type="text" class="form-control" id="precio" name="precio" value="">
+                              <input type="text" class="form-control" id="precio" name="precio">
                             </div>
                           </div>
-                          <div class="d-grid gap-2 col-6 mx-auto button_form">
-                      
-                            <button type="submit" class="btn btn-primary " id="btn_data"  onclick="add_form()">Agregar</button>
-
+                          <div class="d-grid gap-2 col-6 mx-auto button_form">                      
+                            <button type="submit" class="btn btn-primary " id="btn_data">Agregar</button>
                             </div>
                           </div>
                       </form>
@@ -59,40 +56,31 @@
                       <div class="col_cen">3</div>
               </div>               
         <div class="footer">Fo</div>
+        
     </body>  
+    <script type="text/javascript">               
 
-    <script type="text/javascript">     
+        let registrar = "{{route('registrar')}}";              
 
-            let registrar = "{{route('registrar')}}";        
-            let producto = document.getElementById('producto').value;
-            let descripcion = document.getElementById('descripcion').value;
-            let cantidad = document.getElementById('cantidad').value;
-            let precio = document.getElementById('precio').value;
-            let form_data = producto+descripcion+cantidad+precio;
-
-          let prueba=1;
-
-    $.ajax({
-      headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                },
-             
-              url:registrar,
-              data:{prueba},
-              type:'POST',
-              datatype:'json',
-              success:function(resultData){
-                console.log(resultData);
-              },
-              statusCode: {
-                  404: function() {
-                     alert('web not found');
-                  }
-               },
-               error:function(x,xs,xt){
-                  window.open(JSON.stringify(x));
-               }
-            });   
-          
-    </script>
+        $.ajax({
+          headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },    
+                             
+          url:registrar,
+          data: $("#form_data").serialize(),
+          type:'POST',                 
+          success:function(resultData){
+            console.log(resultData);
+          },
+          statusCode: {
+              404: function() {
+                 alert('web not found');
+              }
+           },
+           error:function(x,xs,xt){
+              window.open(JSON.stringify(x));
+           }
+        });         
+</script>    
     </html>

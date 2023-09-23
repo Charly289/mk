@@ -11,12 +11,12 @@ use Response;
 
 class productoController extends Controller
 {
-    function registrer_producto(Request $request ){
-
-        dd($request);
+    
+    function registrer_producto(Request $request ){        
+      
         $productos=products::all();
 
-        return Response::json(['rec'=>$request]);         
+        return $request;         
 
     }
     
