@@ -39,6 +39,7 @@ padding-top: 10px;
 .button_form{
     width: 200px;
     padding-top: 20px;
+    align-items: center;
 }
 .label_form{
     color:aliceblue;
@@ -64,3 +65,4 @@ height: 100px;
    padding-bottom: 20px;
   
 }
+

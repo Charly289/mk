@@ -28,28 +28,29 @@
                             <div>
 
                               <label class="form-label ">Producto</label>
-                              <input type="text" class="form-control" id="producto" name="producto"> 
+                              <input type="text" class="form-control" id="producto" name="producto" placeholder="Producto"  value=""> 
 
                             </div>                          
                               <div >
                                 <label class="form-label">Descripcion</label>
-                                <input type="text" class="form-control" id="descripcion" name="descripcion">
+                                <input type="text" class="form-control" id="descripcion" name="descripcion" placeholder="Descripcion" value="">
                               </div>
                           
                             <div >
                               <label class="form-label">Cantidad</label>
-                              <input type="text" class="form-control" id="cantidad" name="cantidad">
+                              <input type="text" class="form-control" id="cantidad" name="cantidad" placeholder="Cantidad" value="">
                             </div>                          
   
                             <div >
                               <label class="form-label">Precio</label>
-                              <input type="text" class="form-control" id="precio" name="precio">
+                              <input type="text" class="form-control" id="precio" name="precio" placeholder="Precio" value="">
                             </div>
                           </div>
                           <div class="d-grid gap-2 col-6 mx-auto button_form">                      
-                            <button type="submit" class="btn btn-primary " id="btn_data">Agregar</button>
                             </div>
                           </div>
+                          <button type="submit" class="btn btn-primary mx-auto d-block" id="btn_data">Agregar</button>
+
                       </form>
                          {{-- Termina Form --}}
                       </div>
@@ -58,29 +59,41 @@
         <div class="footer">Fo</div>
         
     </body>  
-    <script type="text/javascript">               
+    <script type="text/javascript">    
+    
+    $('#form_data').submit(function(e) {
+      e.preventDefault();
 
-        let registrar = "{{route('registrar')}}";              
+      let registrar = "{{route('registrar')}}";              
+
+
+    var producto = $('#producto').val();
+    var descripcion = $('#descripcion').val();
+    var cantidad = $('#cantidad').val();
+    var precio = $('#precio').val();
+
+
 
         $.ajax({
           headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                     },    
                              
-          url:registrar,
-          data: $("#form_data").serialize(),
+          url:"{{route('registrar')}}",
+          data: {
+            producto:producto,
+            descripcion:descripcion,
+            cantidad:cantidad,
+            precio:precio
+          },
           type:'POST',                 
           success:function(resultData){
             console.log(resultData);
           },
-          statusCode: {
-              404: function() {
-                 alert('web not found');
-              }
-           },
-           error:function(x,xs,xt){
-              window.open(JSON.stringify(x));
-           }
-        });         
+          error: function() {
+        alert('There was some error performing the AJAX call!');
+      }          
+        });        
+      }); 
 </script>    
     </html>
