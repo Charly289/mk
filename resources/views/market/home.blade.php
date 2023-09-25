@@ -64,15 +64,12 @@
     $('#form_data').submit(function(e) {
       e.preventDefault();
 
-      let registrar = "{{route('registrar')}}";              
-
+      let registrar = "{{route('registrar')}}";          
 
     var producto = $('#producto').val();
     var descripcion = $('#descripcion').val();
     var cantidad = $('#cantidad').val();
     var precio = $('#precio').val();
-
-
 
         $.ajax({
           headers: {
@@ -88,7 +85,7 @@
           },
           type:'POST',                 
           success:function(resultData){
-            console.log(resultData);
+            alert("Datos Agregados");
           },
           error: function() {
         alert('There was some error performing the AJAX call!');
