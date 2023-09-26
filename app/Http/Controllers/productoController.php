@@ -18,9 +18,18 @@ class productoController extends Controller
             $products->descripcion = $request->input('descripcion');
             $products->cantidad = $request->input('cantidad');
             $products->precio = $request->input('precio');
-            $products->save();    
+            $products->save(); 
+            
    
 
     }
-    
-}
+
+        function store(){
+
+                $productos=products::all();
+                
+            return view('market.home.store',compact('productos'))
+
+        }
+        
+    }
