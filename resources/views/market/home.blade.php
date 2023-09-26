@@ -38,12 +38,12 @@
                           
                             <div >
                               <label class="form-label">Cantidad</label>
-                              <input type="text" class="form-control" id="cantidad" name="cantidad" placeholder="Cantidad" value="">
+                              <input type="number" class="form-control" id="cantidad" name="cantidad" placeholder="Cantidad" value="">
                             </div>                          
   
                             <div >
                               <label class="form-label">Precio</label>
-                              <input type="text" class="form-control" id="precio" name="precio" placeholder="Precio" value="">
+                              <input type="number" class="form-control" id="precio" name="precio" placeholder="Precio" value="">
                             </div>
                           </div>
                           <div class="d-grid gap-2 col-6 mx-auto button_form">                      
