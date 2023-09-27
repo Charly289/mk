@@ -28,7 +28,7 @@ class productoController extends Controller
 
                 $productos=products::all();
                 
-            return view('market.home.store',compact('productos'))
+            return view('market.home', compact('productos'));
 
         }
         
