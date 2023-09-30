@@ -12,24 +12,18 @@ use Response;
 class productoController extends Controller
 {
     function registrar(Request $request ){
-
+        
             $products = new products();
             $products->nombre = $request->input('producto');
             $products->descripcion = $request->input('descripcion');
             $products->cantidad = $request->input('cantidad');
             $products->precio = $request->input('precio');
             $products->save(); 
+
+             $pro=products::all();       
+             return $pro;
             
-   
 
     }
-
-        function store(){
-
-                $productos=products::all();
-                
-            return view('market.home', compact('productos'));
-
-        }
-        
-    }
+}
+       
