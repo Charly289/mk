@@ -19,6 +19,12 @@ Route::get('/', function () {
 });
 
 Route::post('registrar', [productoController::class, 'registrar'])->name('registrar');
+Route::get('table', [productoController::class, 'productos_data'])->name('table');
+
+Route::get('/prueba', function(){
+    return view('home2');
+
+});
 
 Route::middleware([
     'auth:sanctum',

@@ -8,6 +8,9 @@
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
       <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
       <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap4.min.js"></script>
+      <link  href="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js">
+      <link  href="cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css" rel="stylesheet"> 
+
       <script  type="text/javascript"  src="{{ asset('/js/mk.js')}}"></script>
 
       <link  href="{{ asset('/css/style.css') }}" rel="stylesheet" />
@@ -53,61 +56,40 @@
                             </div>
                           </div>
                           <button type="submit" class="btn btn-primary mx-auto d-block" id="btn_data">Agregar</button>
+                          <br>
 
                       </form>
                          {{-- Termina Form --}}
-                         @section ('css')
                          
-                            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css">
-                            <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap4.min.css">
-                        @endsection
                       </div>
-                      <div class="col_cen" id="productos">212                       
-                                                                                    
-                        <table class="table table-striped" id="productos-table">
-                          <thead>
-                            <tr>s                              
-                              <th>Nombre</th>
-                              <th>Descripcion</th>
-                              <th>Cantidad</th>
-                              <th>Precio</th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            
-                             @if(isset($productos))
-                             @foreach ($productos as $producto)                                
-                                  <tr>
-                                    <td>{{$producto->nombre}}1</td>
-                                    <td>{{$producto->descripcion}}2</td>
-                                    <td>{{$producto->cantidad}}</td>
-                                    <td>{{$producto->precio}}</td>                                                              
-                                  </tr>  
-                              @endforeach                          
-                             @else
-                             <h1>
-                             @php
-                                 echo("Sin Data de BD");
-                             @endphp
-                             </h1>
-                             @endif                                                  
-                        
-                      </div>                                              
+                      <div class="col_cen" id="productos">212                    
+                      <table class="table-productos" id="productos-table">
+                        <thead>
+                          <tr>
+                            <th>Nombre</th>
+                            <th>Descripcion</th>
+                            <th>Cantidad</th>
+                            <th>Precio</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>                            
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                          </tr>
                         </tbody>
                       </table>
+                    </div>                                              
               </div>               
-        <div class="footer">Fo</div>
+        <div class="footer">
+          Fo
+         
+        </div>
         
     </body>  
 
-    @section('js')
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-    <script href="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
-    <script href="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap4.min.js"></script>
-    <script>
-    $('#productos-table').DataTable();
-    </script>
-    @endsection
     <script type="text/javascript">    
     
     $('#form_data').submit(function(e) {
@@ -133,19 +115,17 @@
             precio:precio
           },
           type:'POST',                 
-          success:function(data){
-            var productos=JSON.parse(data);
+          success:function(data){          
             alert("Datos Agregados");
             clear();
-            console.log(productos);
+            console.log(data);
             },
           error: function() {
         alert('There was some error performing the AJAX call!');
       }      
 
         });       
-
-
+        
       }); 
         function clear(){
           $('#producto').val('');
@@ -153,8 +133,28 @@
           $('#cantidad').val('');
           $('#precio').val('');
         }
+
+    </script>
+    <script type="text/javascript">
+
+    $(document).ready(function (){
+      var table = $('#productos-table').DataTable({
+        "pageLength": 10,
+          processing:true,
+          serverSide:true,
+          url:"{{route('table')}}",
+          "type": "GET"
+          columns: [
+          {data: null},
+          {data:'nombre',name:'nombre'},
+          {data:'descripcion',name:'descripcion'},          
+          {data: 'precio',name:'precio'},
+          {data: 'cantidad',name:'cantidad'},
+          ]           
+        });         
+    
+    });
      
 </script>    
-
     </html>
    
