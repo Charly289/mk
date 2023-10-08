@@ -56,7 +56,9 @@
                       </form>
                          {{-- Termina Form --}}
                       </div>
-                      <div class="col_cen">3</div>
+                      <div class="col_cen">3
+                        
+                      </div>                   
               </div>               
         <div class="footer">Fo</div>
         
@@ -88,12 +90,14 @@
           type:'POST',                 
           success:function(resultData){
             alert("Datos Agregados");
-            clear();
+            
+             clear();
+
           },
           error: function() {
         alert('There was some error performing the AJAX call!');
-      }          
-        });        
+      }  
+        });    
       }); 
         function clear(){
           $('#producto').val('');
@@ -101,7 +105,18 @@
           $('#cantidad').val('');
           $('#precio').val('');
         }
-     
-</script>    
+       
+</script>  
+                  
+                    @if(isset($products))
+                    @foreach ($products as $data)                         
+                             <h1> {{$data->id==[1]}}</h1>
+                    @endforeach
+                          @else
+                              <h1>
+                              @php echo("No hay data de BD"); @endphp 
+                              </h1>  
+                          @endphp
+                        @endif
     </html>
    
