@@ -8,6 +8,9 @@
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
       <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
       <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap4.min.js"></script>
+      <link  href="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js">
+      <link  href="cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css" rel="stylesheet"> 
+
       <script  type="text/javascript"  src="{{ asset('/js/mk.js')}}"></script>
 
       <link  href="{{ asset('/css/style.css') }}" rel="stylesheet" />
@@ -21,6 +24,7 @@
                         {{-- Inicia Form --}}
 
                         <form  id="form_data"  name="form_data" action="">
+                          @csrf
                           <div>                        
                           <div class="img_box">
 
@@ -30,39 +34,67 @@
                             <div>
 
                               <label class="form-label ">Producto</label>
-                              <input type="text" class="form-control" id="producto" name="producto" placeholder="Producto"  value=""> 
+                              <input type="text" class="form-control" id="producto" name="producto" placeholder="Producto"  value="" required> 
 
                             </div>                          
                               <div >
                                 <label class="form-label">Descripcion</label>
-                                <input type="text" class="form-control" id="descripcion" name="descripcion" placeholder="Descripcion" value="">
+                                <input type="text" class="form-control" id="descripcion" name="descripcion" placeholder="Descripcion" value="" required>
                               </div>
                           
                             <div >
                               <label class="form-label">Cantidad</label>
-                              <input type="number" class="form-control" id="cantidad" name="cantidad" placeholder="Cantidad" value="">
+                              <input type="number" class="form-control" id="cantidad" name="cantidad" placeholder="Cantidad" value="" required>
                             </div>                          
   
                             <div >
                               <label class="form-label">Precio</label>
-                              <input type="number" class="form-control" id="precio" name="precio" placeholder="Precio" value="">
+                              <input type="number" class="form-control" id="precio" name="precio" placeholder="Precio" value="" required>
                             </div>
                           </div>
                           <div class="d-grid gap-2 col-6 mx-auto button_form">                      
                             </div>
                           </div>
                           <button type="submit" class="btn btn-primary mx-auto d-block" id="btn_data">Agregar</button>
+                          <br>
 
                       </form>
                          {{-- Termina Form --}}
+                         
                       </div>
+
                       <div class="col_cen">3
                         
                       </div>                   
+
+                      <div class="col_cen" id="productos">212                    
+                      <table class="table-productos" id="productos-table">
+                        <thead>
+                          <tr>
+                            <th>Nombre</th>
+                            <th>Descripcion</th>
+                            <th>Cantidad</th>
+                            <th>Precio</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>                            
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>        
               </div>               
-        <div class="footer">Fo</div>
+        <div class="footer">
+          Fo
+         
+        </div>
         
     </body>  
+
     <script type="text/javascript">    
     
     $('#form_data').submit(function(e) {
@@ -88,8 +120,9 @@
             precio:precio
           },
           type:'POST',                 
-          success:function(resultData){
+          success:function(data){          
             alert("Datos Agregados");
+
             
              clear();
 
@@ -98,13 +131,24 @@
         alert('There was some error performing the AJAX call!');
       }  
         });    
-      }); 
+
+            clear();
+            console.log(data);
+            },
+          error: function() {
+        alert('There was some error performing the AJAX call!');
+               
+
+        });       
+        
+           
         function clear(){
           $('#producto').val('');
           $('#descripcion').val('');
           $('#cantidad').val('');
           $('#precio').val('');
         }
+
        
 </script>  
                   
@@ -118,5 +162,30 @@
                               </h1>  
                           @endphp
                         @endif
+
+
+    
+    <script type="text/javascript">
+
+    $(document).ready(function (){
+      var table = $('#productos-table').DataTable({
+        "pageLength": 10,
+          processing:true,
+          serverSide:true,
+          url:"{{route('table')}}",
+          "type": "GET"
+          columns: [
+          {data: null},
+          {data:'nombre',name:'nombre'},
+          {data:'descripcion',name:'descripcion'},          
+          {data: 'precio',name:'precio'},
+          {data: 'cantidad',name:'cantidad'},
+          ]           
+        });         
+    
+    });
+     
+</script>    
+
     </html>
    
