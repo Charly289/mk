@@ -29,6 +29,8 @@
   padding-bottom: 10px;
 padding-top: 10px;  
   grid-template-rows: auto auto auto;
+  color:white;
+  
 }
 .div_form{
     border-style: groove;
@@ -41,6 +43,7 @@ padding-top: 10px;
     padding-top: 20px;
     align-items: center;
 }
+
 .label_form{
     color:aliceblue;
     text-align:center;

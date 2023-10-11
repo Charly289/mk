@@ -31,7 +31,7 @@ class productoController extends Controller
         if($request->ajax()){
             return datatables()->of(products::all())->tojson();
         }
-        return view('home2');
+        return view('market.home');
 
     }
 }
