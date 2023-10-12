@@ -19,7 +19,7 @@
     </head>
     <body>
       <div class="header">He</div>
-              <div class="container border ">
+              <div class="container border">
                       <div class="col_izq">1</div>
                       <div class="col_cen">2
                         {{-- Inicia Form --}}
@@ -61,9 +61,9 @@
                          {{-- Termina Form --}}
                          
                       </div>
-                      <div class="col_cen" id="productos">3   
+                      <div class="col_der" id="productos">3   
                         <h2>Productos</h2>                
-                        <table class="table table-bordered table-striped" id="productos-table">
+                        <table class="table table-productos table-bordered table-striped" id="productos-table">
                           <thead>
                             <tr>
                               <th>Nombre</th>
@@ -75,17 +75,24 @@
                           <tbody>   
                             <script type="text/javascript">
                               $(document).ready(function (){
-                                var table = $('#productos-table').DataTable({                                
+                                var table = $('#productos-table').DataTable({   
+                                  responsive: true,
+                                    ordering: true,
+                                    scroller: {
+                                        loadingIndicator: true
+                                    },                             
                                   "pageLength": 10,
                                     processing:true,
                                     serverSide:true,                                    
                                     url:"{{route('tprod')}}",
-                                    type: "GET",
+                                    type: "GET", 
                                     columns: [
                                     {data:'nombre',name:'nombre'},
                                     {data:'descripcion',name:'descripcion'},          
                                     {data: 'precio',name:'precio'},
                                     {data: 'cantidad',name:'cantidad'},
+                                                                        
+                              
                                     ],  
                                             
                                   });      
@@ -133,8 +140,7 @@
             alert("Datos Agregados");
             clear();
             console.log(data);
-            table.ajax.reload();
-            
+            table.ajax.reload();            
             },
           error: function() {
         alert('There was some error performing the AJAX call!');
