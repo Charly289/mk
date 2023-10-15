@@ -61,7 +61,7 @@
                          {{-- Termina Form --}}
                          
                       </div>
-<<<<<<< HEAD
+
 
                       <div class="col_cen">3
                         
@@ -87,7 +87,7 @@
                         </tbody>
                       </table>
                     </div>        
-=======
+
                       <div class="col_cen" id="productos">3   
                         <h2>Productos</h2>                
                         <table class="table table-bordered table-striped" id="productos-table">
@@ -122,7 +122,6 @@
                     </table>
 
                     </div>                                              
->>>>>>> 1f5eae7a24937b16dbb0ca9cbb6d0f25fe7c82b7
               </div>               
         <div class="footer">
           Fo
@@ -212,7 +211,7 @@
         "pageLength": 10,
           processing:true,
           serverSide:true,
-          url:"{{route('table')}}",
+          url:"{{route('tprod')}}",
           "type": "GET"
           columns: [
           {data: null},
@@ -227,9 +226,6 @@
      
 </script>    
 
-=======
-    </script>
-    
->>>>>>> 1f5eae7a24937b16dbb0ca9cbb6d0f25fe7c82b7
+
     </html>
    

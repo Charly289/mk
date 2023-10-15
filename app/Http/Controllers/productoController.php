@@ -20,20 +20,7 @@ class productoController extends Controller
         
             
 
-    function registrar(Request $request ){
-
-            $products = new products();
-            $products->nombre = $request->input('producto');
-            $products->descripcion = $request->input('descripcion');
-            $products->cantidad = $request->input('cantidad');
-            $products->precio = $request->input('precio');
-            $products->save(); 
-             
-            $respuesta = ['success' => true, 'message' => 'Datos Guardados','products'=>$products];
-            return $respuesta;
-
-
-    }
+    
     function registrar(Request $request){     
         
         $prod = new products();
