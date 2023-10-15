@@ -36,9 +36,9 @@ class productoController extends Controller
                 ->addColumn('action', function($row){
 
                     $btn = '<a href="javascript:void(0)" class="edit btn btn-info btn-sm">View</a>
-                    <a href="javascript:void(0)" class="edit btn btn-primary btn-sm">Edit</a>
-                    <a href="javascript:void(0)" class="edit btn btn-danger btn-sm">Delete</a>';
-                    return $btn;
+                            <a href="javascript:void(0)" class="edit btn btn-primary btn-sm">Edit</a>
+                            <a href="javascript:void(0)" class="edit btn btn-danger btn-sm">Delete</a>';
+                            return $btn;
 
                 })
                 ->rawColumns(['action'])
