@@ -4,9 +4,10 @@
 
 }
 
-.col_der{
-    
-    border-style: groove;
+.col_der{    
+border-style: groove;
+background-color: white;
+color:black;
 
 }
 
@@ -68,4 +69,11 @@ height: 100px;
    padding-bottom: 20px;
   
 }
+.table-productos{
+    width: 100%;
+    border: 1px solid white;
+    background-color:white;
+    
+}
+
 

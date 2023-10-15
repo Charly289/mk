@@ -15,11 +15,28 @@
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
     <link href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css" rel="stylesheet">
     <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css" />
+
+    <link href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css" rel="stylesheet">
+
+    <link href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css" rel="stylesheet">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>  
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.js"></script>
+
+    <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+
+    <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
       
     </head>
     <body>
       <div class="header">He</div>
-              <div class="container border ">
+              <div class="container border">
                       <div class="col_izq">1</div>
                       <div class="col_cen">2
                         {{-- Inicia Form --}}
@@ -61,66 +78,43 @@
                          {{-- Termina Form --}}
                          
                       </div>
-
-
-                      <div class="col_cen">3
-                        
-                      </div>                   
-
-                      <div class="col_cen" id="productos">212                    
-                      <table class="table-productos" id="productos-table">
-                        <thead>
-                          <tr>
-                            <th>Nombre</th>
-                            <th>Descripcion</th>
-                            <th>Cantidad</th>
-                            <th>Precio</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr>                            
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                          </tr>
-                        </tbody>
-                      </table>
-                    </div>        
-
                       <div class="col_cen" id="productos">3   
                         <h2>Productos</h2>                
-                        <table class="table table-bordered table-striped" id="productos-table">
+                        <table class="table table-productos table-bordered table-striped" id="productos-table">
                           <thead>
                             <tr>
                               <th>Nombre</th>
                               <th>Descripcion</th>
                               <th>Cantidad</th>
                               <th>Precio</th>
+                              <th>Acción</th>
                             </tr>
                           </thead>
                           <tbody>   
                             <script type="text/javascript">
                               $(document).ready(function (){
-                                var table = $('#productos-table').DataTable({                                
-                                  "pageLength": 10,
+                                var table = $('#productos-table').DataTable({                                                                
                                     processing:true,
                                     serverSide:true,                                    
-                                    url:"{{route('tprod')}}",
-                                    type: "GET",
+                                    pageLength: 10,
+                                    ajax:"{{route('tprod')}}",                                    
                                     columns: [
                                     {data:'nombre',name:'nombre'},
                                     {data:'descripcion',name:'descripcion'},          
                                     {data: 'precio',name:'precio'},
                                     {data: 'cantidad',name:'cantidad'},
-                                    ],  
-                                            
+                                    {
+                                      data: 'accion',
+                                      name: 'accion',
+                                      orderable:false, 
+                                      searchable:false,
+                                    },                                                                                                     
+                                    ]                                              
                                   });      
                               });
                             </script>        
                           </tbody>
                     </table>
-
                     </div>                                              
               </div>               
         <div class="footer">
@@ -170,8 +164,7 @@
 
             clear();
             console.log(data);
-            table.ajax.reload();
-            
+            table.ajax.reload();            
             },
           error: function() {
         alert('There was some error performing the AJAX call!');
@@ -187,45 +180,7 @@
           $('#precio').val('');
         }
 
-<<<<<<< HEAD
-       
-</script>  
-                  
-                    @if(isset($products))
-                    @foreach ($products as $data)                         
-                             <h1> {{$data->id==[1]}}</h1>
-                    @endforeach
-                          @else
-                              <h1>
-                              @php echo("No hay data de BD"); @endphp 
-                              </h1>  
-                          @endphp
-                        @endif
-
-
+    </script>
     
-    <script type="text/javascript">
-
-    $(document).ready(function (){
-      var table = $('#productos-table').DataTable({
-        "pageLength": 10,
-          processing:true,
-          serverSide:true,
-          url:"{{route('tprod')}}",
-          "type": "GET"
-          columns: [
-          {data: null},
-          {data:'nombre',name:'nombre'},
-          {data:'descripcion',name:'descripcion'},          
-          {data: 'precio',name:'precio'},
-          {data: 'cantidad',name:'cantidad'},
-          ]           
-        });         
-    
-    });
-     
-</script>    
-
-
     </html>
    

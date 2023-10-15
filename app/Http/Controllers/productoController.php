@@ -7,7 +7,6 @@ use Illuminate\Support\Facades\View;
 use Illuminate\Http\Request;
 use Iluminate\View\market\home;
 use App\Models\products;
-use LDAP\Result;
 use Response;
 
 
@@ -43,7 +42,19 @@ class productoController extends Controller
 
     function productos_data(Request $request){
         if($request->ajax()){
-            return datatables()->of(products::all())->tojson();
+            $data = products::latest()->get();
+            return datatables::of($data)
+                ->addIndexColumn()
+                ->addColumn('action', function($row){
+
+                    $btn = '<a href="javascript:void(0)" class="edit btn btn-info btn-sm">View</a>
+                            <a href="javascript:void(0)" class="edit btn btn-primary btn-sm">Edit</a>
+                            <a href="javascript:void(0)" class="edit btn btn-danger btn-sm">Delete</a>';
+                            return $btn;
+
+                })
+                ->rawColumns(['action'])
+                ->make(true);
         }
         return view('market.home');
 
