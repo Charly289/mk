@@ -17,14 +17,15 @@ use App\Http\Controllers\productoController;
 Route::get('/', function () {
     return view('market/home');
 });
-
 Route::post('registrar', [productoController::class, 'registrar'])->name('registrar');
-Route::get('table', [productoController::class, 'productos_data'])->name('table');
-
-Route::get('/prueba', function(){
+Route::get('/tprod', [productoController::class, 'productos_data'])->name('tprod');
+Route::get('/tproducto', function(){
     return view('home2');
+})->name('tproducto');
 
-});
+
+
+
 
 Route::middleware([
     'auth:sanctum',

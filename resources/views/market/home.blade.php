@@ -2,18 +2,19 @@
 <html>
     <head>
       <meta name="csrf-token" content="{{ csrf_token() }}">
-      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
-      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
-      <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-      <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
-      <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap4.min.js"></script>
-      <link  href="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js">
-      <link  href="cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css" rel="stylesheet"> 
-
-      <script  type="text/javascript"  src="{{ asset('/js/mk.js')}}"></script>
-
       <link  href="{{ asset('/css/style.css') }}" rel="stylesheet" />
+
+      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css">
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>   
+      <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+      
+      
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">    
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+    <link href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css" rel="stylesheet">
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
       
     </head>
     <body>
@@ -54,14 +55,13 @@
                           </div>
                           <div class="d-grid gap-2 col-6 mx-auto button_form">                      
                             </div>
-                          </div>
-                          <button type="submit" class="btn btn-primary mx-auto d-block" id="btn_data">Agregar</button>
-                          <br>
-
+                          </div>                        
+                          <button type="submit" class="btn btn-primary mx-auto d-block" id="btn_data">Agregar</button>                          
                       </form>
                          {{-- Termina Form --}}
                          
                       </div>
+<<<<<<< HEAD
 
                       <div class="col_cen">3
                         
@@ -87,6 +87,42 @@
                         </tbody>
                       </table>
                     </div>        
+=======
+                      <div class="col_cen" id="productos">3   
+                        <h2>Productos</h2>                
+                        <table class="table table-bordered table-striped" id="productos-table">
+                          <thead>
+                            <tr>
+                              <th>Nombre</th>
+                              <th>Descripcion</th>
+                              <th>Cantidad</th>
+                              <th>Precio</th>
+                            </tr>
+                          </thead>
+                          <tbody>   
+                            <script type="text/javascript">
+                              $(document).ready(function (){
+                                var table = $('#productos-table').DataTable({                                
+                                  "pageLength": 10,
+                                    processing:true,
+                                    serverSide:true,                                    
+                                    url:"{{route('tprod')}}",
+                                    type: "GET",
+                                    columns: [
+                                    {data:'nombre',name:'nombre'},
+                                    {data:'descripcion',name:'descripcion'},          
+                                    {data: 'precio',name:'precio'},
+                                    {data: 'cantidad',name:'cantidad'},
+                                    ],  
+                                            
+                                  });      
+                              });
+                            </script>        
+                          </tbody>
+                    </table>
+
+                    </div>                                              
+>>>>>>> 1f5eae7a24937b16dbb0ca9cbb6d0f25fe7c82b7
               </div>               
         <div class="footer">
           Fo
@@ -106,6 +142,7 @@
     var descripcion = $('#descripcion').val();
     var cantidad = $('#cantidad').val();
     var precio = $('#precio').val();
+    var table = $('#productos-table').DataTable();
 
         $.ajax({
           headers: {
@@ -134,6 +171,8 @@
 
             clear();
             console.log(data);
+            table.ajax.reload();
+            
             },
           error: function() {
         alert('There was some error performing the AJAX call!');
@@ -149,6 +188,7 @@
           $('#precio').val('');
         }
 
+<<<<<<< HEAD
        
 </script>  
                   
@@ -187,5 +227,9 @@
      
 </script>    
 
+=======
+    </script>
+    
+>>>>>>> 1f5eae7a24937b16dbb0ca9cbb6d0f25fe7c82b7
     </html>
    
