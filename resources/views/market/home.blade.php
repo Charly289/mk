@@ -77,7 +77,9 @@
                               <th>Descripcion</th>
                               <th>Cantidad</th>
                               <th>Precio</th>
-                              <th>Acción</th>
+                              <th>Editar</th>
+                              <th>Eliminar</th>
+
                             </tr>
                           </thead>
                           <tbody>   
@@ -91,33 +93,15 @@
                                     serverSide:true,                                    
                                     pageLength: 10,
                                     ajax:"{{route('tprod')}}",  
-                                    type:"GET", 
-                                    columnDefs: [
-                                    
-                                    { "width": "19%","searchable": false,"orderable": false, "className": "text-center  font-weight-bold","targets": 4 },
-                                    { "width": "19%","searchable": false,"orderable": false, "className": "text-center  font-weight-bold","targets": 4 },
-                                    { "width": "19%","searchable": false,"orderable": false, "className": "text-center  font-weight-bold","targets": 4 },
-                                    { "width": "19%","searchable": false,"orderable": false, "className": "text-center  font-weight-bold","targets": 4 },
-                                    { "width": "19%","searchable": true,"orderable": true, "className": "text-center tfont-weight-bold","targets": 4 },
-
-                                  ],                                 
+                                    type:"GET",                                                                      
                                     columns: [
                                     {data:'nombre',name:'nombre'},
                                     {data:'descripcion',name:'descripcion'},          
                                     {data: 'cantidad',name:'cantidad'},
                                     {data: 'precio',name:'precio'},
-
-                                    {
-                                  "render":function(data,type,row){
-
-                                    
-
-                                    return   '<button class="btn btn-outline-success" btn-icon-sm" type="button" onclick="location.href=\''+url_get_edit_report;'" data-toggle="tooltip" data-placement="top" title="Editar"></button>'
-
-                                  }    
-                                    }
-                                      
-                                    ]                                              
+                                    {defaultContent: '<button class="btn btn-primary mx-auto d-block" id="btn_data">Editar</button>'},
+                                    {defaultContent: '<button class="btn btn-danger mx-auto d-block" id="btn_data">Eliminar</button>'},                                      
+                                    ],                                              
                                   });      
                               });
                             </script>        
