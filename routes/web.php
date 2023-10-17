@@ -19,6 +19,9 @@ Route::get('/', function () {
 });
 Route::post('registrar', [productoController::class, 'registrar'])->name('registrar');
 Route::get('/tprod', [productoController::class, 'productos_data'])->name('tprod');
+Route::get('/ed_rep', [productoController::class, 'ed_rep'])->name('ed_rep');
+Route::get('/del_rep', [productoController::class, 'del_rep'])->name('del_rep');
+
 Route::get('/tproducto', function(){
     return view('home2');
 })->name('tproducto');

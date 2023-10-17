@@ -26,88 +26,89 @@
     </head>
     <body>
       <div class="header">He</div>
-              <div class="container border">
-                      <div class="col_izq">1</div>
-                      <div class="col_cen">2
-                        {{-- Inicia Form --}}
+              <div class="container border">  
+                <div class="col_izq">1</div>
+                    <div class="col_cen">2
+                      <form  id="form_data"  name="form_data" action="">
+                        @csrf
+                        <div>                        
+                        <div class="img_box">
 
-                        <form  id="form_data"  name="form_data" action="">
-                          @csrf
-                          <div>                        
-                          <div class="img_box">
+                          <img src="{{asset('/img/logo.png')}} " class="img">
+                        </div>
+                        <div class="div_form label_form">
+                          <div>
 
-                            <img src="{{asset('/img/logo.png')}} " class="img">
-                          </div>
-                          <div class="div_form label_form">
-                            <div>
+                            <label class="form-label ">Producto</label>
+                            <input type="text" class="form-control" id="producto" name="producto" placeholder="Producto"  value="" required> 
 
-                              <label class="form-label ">Producto</label>
-                              <input type="text" class="form-control" id="producto" name="producto" placeholder="Producto"  value="" required> 
-
-                            </div>                          
-                              <div >
-                                <label class="form-label">Descripcion</label>
-                                <input type="text" class="form-control" id="descripcion" name="descripcion" placeholder="Descripcion" value="" required>
-                              </div>
-                          
+                          </div>                          
                             <div >
-                              <label class="form-label">Cantidad</label>
-                              <input type="number" class="form-control" id="cantidad" name="cantidad" placeholder="Cantidad" value="" required>
-                            </div>                          
-  
-                            <div >
-                              <label class="form-label">Precio</label>
-                              <input type="number" class="form-control" id="precio" name="precio" placeholder="Precio" value="" required>
+                              <label class="form-label">Descripcion</label>
+                              <input type="text" class="form-control" id="descripcion" name="descripcion" placeholder="Descripcion" value="" required>
                             </div>
+                        
+                          <div >
+                            <label class="form-label">Cantidad</label>
+                            <input type="number" class="form-control" id="cantidad" name="cantidad" placeholder="Cantidad" value="" required>
+                          </div>                          
+
+                          <div >
+                            <label class="form-label">Precio</label>
+                            <input type="number" class="form-control" id="precio" name="precio" placeholder="Precio" value="" required>
                           </div>
-                          <div class="d-grid gap-2 col-6 mx-auto button_form">                      
-                            </div>
-                          </div>                        
-                          <button type="submit" class="btn btn-primary mx-auto d-block" id="btn_data">Agregar</button>                          
-                      </form>
-                         {{-- Termina Form --}}
-                         
+                        </div>
+                        <div class="d-grid gap-2 col-6 mx-auto button_form">                      
+                          </div>
+                        </div>                        
+                        <button type="submit" class="btn btn-primary mx-auto d-block" id="btn_data">Agregar</button>                          
+                    </form>
+                    </div>
+                      <div class="col_der" id="productos">3
+                        <h2 class="title">Productos</h2>                
+                                  <table class="table table-productos table-striped" id="productos-table">
+                                    <thead>
+                                      <tr>
+                                        <th>Nombre</th>
+                                        <th>Descripcion</th>
+                                        <th>Cantidad</th>
+                                        <th>Precio</th>
+                                        <th>Editar</th>
+                                        <th>Eliminar</th>
+
+                                      </tr>
+                                    </thead>
+                                    <tbody>   
+                                      <script type="text/javascript">
+                                      
+                                        $(document).ready(function (){
+                                        
+                                          var table = $('#productos-table').DataTable({                                                                
+                                              processing:true,
+                                              serverSide:true,                                    
+                                              pageLength: 5,
+                                              ajax:"{{route('tprod')}}",  
+                                              type:"GET",                                                                      
+                                              columns: [
+                                              {data:'nombre'},
+                                              {data:'descripcion'},          
+                                              {data:'cantidad'},
+                                              {data:'precio'},
+                                              {defaultContent: '<a  class="editar btn btn-primary btn-sm" id="ed_rep" value="" onclick="get_data();">Editar</a>'},
+                                              {defaultContent: '<a href="{{route('del_rep')}}"  class="btn btn-danger btn-sm" id="del_rep" value="">Eliminar</a>'},                                      
+                                              ],                                              
+                                          
+                                               });
+
+                                                
+                                            });
+                                             
+                                           
+                                          </script>        
+                                        </tbody>
+                                  </table>
                       </div>
-                      <div class="col_cen" id="productos">3   
-                        <h2>Productos</h2>                
-                        <table class="table table-productos table-bordered table-striped" id="productos-table">
-                          <thead>
-                            <tr>
-                              <th>Nombre</th>
-                              <th>Descripcion</th>
-                              <th>Cantidad</th>
-                              <th>Precio</th>
-                              <th>Editar</th>
-                              <th>Eliminar</th>
-
-                            </tr>
-                          </thead>
-                          <tbody>   
-                            <script type="text/javascript">
-                            
-                            let url_get_edit_report="{{ route('tprod') }}";
-
-                              $(document).ready(function (){
-                                var table = $('#productos-table').DataTable({                                                                
-                                    processing:true,
-                                    serverSide:true,                                    
-                                    pageLength: 10,
-                                    ajax:"{{route('tprod')}}",  
-                                    type:"GET",                                                                      
-                                    columns: [
-                                    {data:'nombre',name:'nombre'},
-                                    {data:'descripcion',name:'descripcion'},          
-                                    {data: 'cantidad',name:'cantidad'},
-                                    {data: 'precio',name:'precio'},
-                                    {defaultContent: '<button class="btn btn-primary mx-auto d-block" id="btn_data">Editar</button>'},
-                                    {defaultContent: '<button class="btn btn-danger mx-auto d-block" id="btn_data">Eliminar</button>'},                                      
-                                    ],                                              
-                                  });      
-                              });
-                            </script>        
-                          </tbody>
-                    </table>
-                    </div>                                              
+                     
               </div>               
         <div class="footer">
           Fo
@@ -143,11 +144,8 @@
           },
           type:'POST',                 
           success:function(data){          
-            alert("Datos Agregados");
-
-            
+            alert("Datos Agregados");            
              clear();
-
           },
           error: function() {
         alert('There was some error performing the AJAX call!');

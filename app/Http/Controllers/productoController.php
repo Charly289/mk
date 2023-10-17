@@ -48,6 +48,15 @@ class productoController extends Controller
         return view('market.home');
 
     }
+
+    function ed_rep(Request $request){
+         
+
+    }
+
+    function del_rep(Request $request){
+       
+    }
 }
        
 
