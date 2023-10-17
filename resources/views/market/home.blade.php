@@ -63,6 +63,51 @@
                         </div>                        
                         <button type="submit" class="btn btn-primary mx-auto d-block" id="btn_data">Agregar</button>                          
                     </form>
+                    <script type="text/javascript">    
+    
+                      $('#form_data').submit(function(){   
+                      var registrar = "{{route('registrar')}}";                            
+                      var producto = $('#producto').val();
+                      var descripcion = $('#descripcion').val();
+                      var cantidad = $('#cantidad').val();
+                      var precio = $('#precio').val();
+                      var table = $('#productos-table').DataTable();
+                  
+                          $.ajax({
+                            headers: {
+                                      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                                      },    
+                                               
+                            url:"{{route('registrar')}}",
+                            data: {
+                              producto:producto,
+                              descripcion:descripcion,
+                              cantidad:cantidad,
+                              precio:precio
+                            },
+                            type:'POST',                 
+                            success:function(data){          
+                              alert("Datos Agregados");            
+                               clear();
+                               console.log(data);
+                              table.ajax.reload();            
+                              
+                            },
+                            error: function() {
+                          alert('There was some error performing the AJAX call!');
+                            },                            
+                        }); 
+                    });                    
+                           
+                             
+                          function clear(){
+                            $('#producto').val('');
+                            $('#descripcion').val('');
+                            $('#cantidad').val('');
+                            $('#precio').val('');
+                          }
+                  
+                      </script>
                     </div>
                       <div class="col_der" id="productos">3
                         <h2 class="title">Productos</h2>                
@@ -117,60 +162,7 @@
         
     </body>  
 
-    <script type="text/javascript">    
     
-    $('#form_data').submit(function(e) {
-      e.preventDefault();
-
-      let registrar = "{{route('registrar')}}";          
-
-    var producto = $('#producto').val();
-    var descripcion = $('#descripcion').val();
-    var cantidad = $('#cantidad').val();
-    var precio = $('#precio').val();
-    var table = $('#productos-table').DataTable();
-
-        $.ajax({
-          headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    },    
-                             
-          url:"{{route('registrar')}}",
-          data: {
-            producto:producto,
-            descripcion:descripcion,
-            cantidad:cantidad,
-            precio:precio
-          },
-          type:'POST',                 
-          success:function(data){          
-            alert("Datos Agregados");            
-             clear();
-          },
-          error: function() {
-        alert('There was some error performing the AJAX call!');
-      }  
-        });    
-
-            clear();
-            console.log(data);
-            table.ajax.reload();            
-            },
-          error: function() {
-        alert('There was some error performing the AJAX call!');
-               
-
-        });       
-        
-           
-        function clear(){
-          $('#producto').val('');
-          $('#descripcion').val('');
-          $('#cantidad').val('');
-          $('#precio').val('');
-        }
-
-    </script>
     
     </html>
    
