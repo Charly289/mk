@@ -13,18 +13,11 @@ use Response;
 
 
 class productoController extends Controller
-{
-
-    
-    function registrer_producto(Request $request ){
-        
-            
-
-    
+{    
     function registrar(Request $request){     
         
         $prod = new products();
-        $prod->nombre =$request->input('producto');
+        $prod->producto =$request->input('producto');
         $prod->descripcion =$request->input('descripcion');
         $prod->cantidad =$request->input('cantidad');
         $prod->precio =$request->input('precio');
@@ -33,13 +26,10 @@ class productoController extends Controller
         //return response()->json([$request]);
         $productos = products::all();
 
+        return products::all();                    
 
-        return products::all();
-                    
+    }    
 
-    }
-    
-}
 
     function productos_data(Request $request){
         if($request->ajax()){
@@ -51,12 +41,13 @@ class productoController extends Controller
 
     function ed_rep(Request $request){
          
+        return $request;
 
     }
 
     function del_rep(Request $request){
        
     }
-}
-       
 
+       
+}

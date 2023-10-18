@@ -60,8 +60,12 @@
                         </div>
                         <div class="d-grid gap-2 col-6 mx-auto button_form">                      
                           </div>
-                        </div>                        
-                        <button type="submit" class="btn btn-primary mx-auto d-block" id="btn_data">Agregar</button>                          
+                        </div> 
+                        <div class="container">
+                            <button type="submit" class="btn btn-primary mx-auto d-block" id="btn_add" onclick="add_pro();">Agregar</button>
+                            <button class="btn btn-primary mx-auto d-block" id="btn_ed" onclick="ed_pro(data);">Editar</button>                     
+                          </div>                       
+                        
                     </form>
                     </div>
                       <div class="col_der" id="productos">3
@@ -69,7 +73,7 @@
                                   <table class="table table-productos table-striped" id="productos-table">
                                     <thead>
                                       <tr>
-                                        <th>Nombre</th>
+                                        <th>Producto</th>
                                         <th>Descripcion</th>
                                         <th>Cantidad</th>
                                         <th>Precio</th>
@@ -90,16 +94,17 @@
                                               ajax:"{{route('tprod')}}",  
                                               type:"GET",                                                                      
                                               columns: [
-                                              {data:'nombre'},
+                                              {data:'producto'},
                                               {data:'descripcion'},          
                                               {data:'cantidad'},
                                               {data:'precio'},
-                                              {defaultContent: '<a  class="editar btn btn-primary btn-sm" id="ed_rep" value="" onclick="get_data();">Editar</a>'},
+                                              {defaultContent: '<button  type="button" class="editar btn btn-primary btn-sm" id="ed_rep">Editar</button>'},
                                               {defaultContent: '<a href="{{route('del_rep')}}"  class="btn btn-danger btn-sm" id="del_rep" value="">Eliminar</a>'},                                      
                                               ],                                              
                                           
                                                });
 
+                                               editar("#productos-table tbody", table);
                                                 
                                             });
                                              
@@ -117,57 +122,99 @@
         
     </body>  
 
-    <script type="text/javascript">    
-    
-    $('#form_data').submit(function(e) {
-      e.preventDefault();
+    <script type="text/javascript">  
+         
+          function add_pro(){
+            $('#form_data').submit(function(e){
+                  e.preventDefault();
 
-      let registrar = "{{route('registrar')}}";          
+                let registrar = "{{route('registrar')}}";          
+                var producto = $('#producto').val();
+                var descripcion = $('#descripcion').val();
+                var cantidad = $('#cantidad').val();
+                var precio = $('#precio').val();
+                var table = $('#productos-table').DataTable();
 
-    var producto = $('#producto').val();
-    var descripcion = $('#descripcion').val();
-    var cantidad = $('#cantidad').val();
-    var precio = $('#precio').val();
-    var table = $('#productos-table').DataTable();
-
-        $.ajax({
-          headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    },    
-                             
-          url:"{{route('registrar')}}",
-          data: {
-            producto:producto,
-            descripcion:descripcion,
-            cantidad:cantidad,
-            precio:precio
-          },
-          type:'POST',                 
-          success:function(data){          
-            alert("Datos Agregados");            
-             clear();
-          },
-          error: function() {
-        alert('There was some error performing the AJAX call!');
-      }  
-        });    
-
-            clear();
-            console.log(data);
-            table.ajax.reload();            
-            },
-          error: function() {
-        alert('There was some error performing the AJAX call!');
-               
-
-        });       
+                    $.ajax({
+                      headers: {
+                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                                },    
+                                        
+                      url:"{{route('registrar')}}",
+                      data: {
+                        producto:producto,
+                        descripcion:descripcion,
+                        cantidad:cantidad,
+                        precio:precio
+                      },
+                      type:'POST',                 
+                      success:function(data){          
+                        alert("Datos Agregados");   
+                        table.ajax.reload();         
+                        clear();
+                     },
+                       error: function() {
+                     alert('There was some error performing the AJAX call!');
+                   }                 
+                  
+              });       
+        });   
         
+            
+          }
+           
            
         function clear(){
           $('#producto').val('');
           $('#descripcion').val('');
           $('#cantidad').val('');
           $('#precio').val('');
+        }
+
+        var editar=function(tbody, table){
+          $(tbody).on("click", "button.editar", function(){
+              var data=table.row($(this).parents("tr")).data();
+                  var producto=$("#producto").val(data.producto),
+                      descripcion=$("#descripcion").val(data.descripcion),
+                      cantidad=$("#cantidad").val(data.cantidad),
+                      precio=$("#precio").val(data.precio);                      
+                      console.log(data);
+
+                  
+          });
+
+        }
+
+        function ed_pro(){
+          alert("Producto Actualizado");
+
+                let registrar = "{{route('ed_rep')}}";          
+                var producto = $('#producto').val();
+                var descripcion = $('#descripcion').val();
+                var cantidad = $('#cantidad').val();
+                var precio = $('#precio').val();
+                $.ajax({
+                      headers: {
+                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                                },    
+                      url:"{{route('ed_rep')}}",
+                      data: {
+                        producto:producto,
+                        descripcion:descripcion,
+                        cantidad:cantidad,
+                        precio:precio
+                      },
+                      type:'POST',                 
+                      success:function(data){          
+                        alert("Datos Actualizados");   
+                        table.ajax.reload();         
+                        clear();
+                     },
+                       error: function() {
+                     alert('There was some error performing the AJAX call!');
+                   }                                   
+              });          
+    
         }
 
     </script>
