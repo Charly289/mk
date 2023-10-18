@@ -63,7 +63,7 @@
                         </div> 
                         <div class="container">
                             <button type="submit" class="btn btn-primary mx-auto d-block" id="btn_add" onclick="add_pro();">Agregar</button>
-                            <button class="btn btn-primary mx-auto d-block" id="btn_ed" onclick="ed_pro(data);">Editar</button>                     
+                            <button class="btn btn-primary mx-auto d-block" id="btn_ed" onclick="ed_pro();">Editar</button>                     
                           </div>                       
                         
                     </form>
@@ -90,7 +90,7 @@
                                           var table = $('#productos-table').DataTable({                                                                
                                               processing:true,
                                               serverSide:true,                                    
-                                              pageLength: 5,
+                                              pageLength: 10,
                                               ajax:"{{route('tprod')}}",  
                                               type:"GET",                                                                      
                                               columns: [
@@ -178,7 +178,6 @@
                       descripcion=$("#descripcion").val(data.descripcion),
                       cantidad=$("#cantidad").val(data.cantidad),
                       precio=$("#precio").val(data.precio);                      
-                      console.log(data);
 
                   
           });
@@ -186,34 +185,16 @@
         }
 
         function ed_pro(){
-          alert("Producto Actualizado");
-
-                let registrar = "{{route('ed_rep')}}";          
+          alert("Producto Actualizado");    
+          
                 var producto = $('#producto').val();
                 var descripcion = $('#descripcion').val();
                 var cantidad = $('#cantidad').val();
                 var precio = $('#precio').val();
-                $.ajax({
-                      headers: {
-                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                                },    
-                      url:"{{route('ed_rep')}}",
-                      data: {
-                        producto:producto,
-                        descripcion:descripcion,
-                        cantidad:cantidad,
-                        precio:precio
-                      },
-                      type:'POST',                 
-                      success:function(data){          
-                        alert("Datos Actualizados");   
-                        table.ajax.reload();         
-                        clear();
-                     },
-                       error: function() {
-                     alert('There was some error performing the AJAX call!');
-                   }                                   
-              });          
+                data=producto+descripcion+cantidad+precio;
+                console.log(data);
+
+
     
         }
 
