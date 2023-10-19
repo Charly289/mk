@@ -39,9 +39,18 @@ class productoController extends Controller
 
     }
 
-    function ed_rep(Request $request){
-         
-        return $request;
+    function editar_reporte(Request $request){ 
+
+        $prod = new products();
+        $prod->producto =$request->input('producto');
+        $prod->descripcion =$request->input('descripcion');
+        $prod->cantidad =$request->input('cantidad');
+        $prod->precio =$request->input('precio');
+        $prod->save();   
+
+        $respuesta = ['success' => true, 'message' => 'Producto Actualizado','folio'=>$prod];
+        return $respuesta;
+
 
     }
 

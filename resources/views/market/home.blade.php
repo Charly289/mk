@@ -26,8 +26,9 @@
     </head>
     <body>
       <div class="header">He</div>
-              <div class="container border">  
-                <div class="col_izq">1</div>
+
+              <div class="container">
+                
                     <div class="col_cen">2
                       <form  id="form_data"  name="form_data" action="">
                         @csrf
@@ -63,18 +64,18 @@
                         </div> 
                         <div class="container">
                             <button type="submit" class="btn btn-primary mx-auto d-block" id="btn_add" onclick="add_pro();">Agregar</button>
-                            <button class="btn btn-primary mx-auto d-block" id="btn_ed" onclick="ed_pro();">Editar</button>                     
+                            <button class="btn btn-primary mx-auto d-block" id="btn_ed" onclick="editar_producto();">Editar</button>                     
                           </div>                       
                         
                     </form>
                     </div>
                       <div class="col_der" id="productos">3
                         <h2 class="title">Productos</h2>                
-                                  <table class="table table-productos table-striped" id="productos-table">
-                                    <thead>
+                                  <table class="table-productos table-striped" id="productos-table">
+                                    <thead class="table-dark">
                                       <tr>
                                         <th>Producto</th>
-                                        <th>Descripcion</th>
+                                        <th>Detalles</th>
                                         <th>Cantidad</th>
                                         <th>Precio</th>
                                         <th>Editar</th>
@@ -112,8 +113,8 @@
                                           </script>        
                                         </tbody>
                                   </table>
-                      </div>
-                     
+                      </div>                   
+
               </div>               
         <div class="footer">
           Fo
@@ -162,6 +163,51 @@
         
             
           }
+
+          function editar_producto(){    
+
+          $('#form_data').submit(function(e){
+            e.preventDefault();
+                let ed_rep = "{{route('ed_rep')}}";                              
+                var producto = $('#producto').val();
+                var descripcion = $('#descripcion').val();
+                var cantidad = $('#cantidad').val();
+                var precio = $('#precio').val();
+                var table = $('#productos-table').DataTable();
+
+
+                data=[producto,descripcion,cantidad,precio]; 
+                
+                alert("Data en funcion"+data);
+                                
+                $.ajax({
+                      headers: {
+                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                                },    
+                                        
+                      url:"{{route('ed_rep')}}",
+                      data: {
+                        producto:producto,
+                        descripcion:descripcion,
+                        cantidad:cantidad,
+                        precio:precio
+                      },
+                      type:'POST',                 
+                      success:function(data){     
+                        table.ajax.reload();         
+                        clear();    
+                        alert("Datos Actualizados");   
+                        
+                    },
+                      error: function() {
+                    alert('There was some error performing the AJAX call#23!');
+                  }                 
+                  
+                });    
+                  
+            });   
+}
+
            
            
         function clear(){
@@ -184,20 +230,7 @@
 
         }
 
-        function ed_pro(){
-          alert("Producto Actualizado");    
-          
-                var producto = $('#producto').val();
-                var descripcion = $('#descripcion').val();
-                var cantidad = $('#cantidad').val();
-                var precio = $('#precio').val();
-                data=producto+descripcion+cantidad+precio;
-                console.log(data);
-
-
-    
-        }
-
+       
     </script>
     
     </html>

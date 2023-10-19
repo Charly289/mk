@@ -1,9 +1,4 @@
 
-.border{
-    border-style: groove;
-
-}
-
 .col_der{    
 border-style: groove;
 background-color: white;
@@ -19,6 +14,14 @@ font-size: 12px;
 
 }
 
+
+.col_new{
+    
+    border-style: groove;
+
+
+}
+
 .col_izq{
     
     border-style: groove;
@@ -27,13 +30,13 @@ font-size: 12px;
 .container {
   display: grid;
   grid-template-columns: auto auto auto;
-  grid-gap: 0px;
+  grid-gap: 10px;
   background-color: black;
-  padding-bottom: 10px;
-padding-top: 10px;  
-  grid-template-rows: auto auto auto auto;
+  grid-template-rows: auto auto auto;
   color:white;
-  
+  border-style: groove;
+  margin: auto;  
+  padding-top: 10px;
 }
 .title{
 font-size: 20px;
@@ -79,8 +82,15 @@ height: 100px;
     table-layout: fixed;
     width: 100%;
     border-collapse: collapse;
-    border: 3px solid black;    
-    font-size: 12px;
-}
+    border: 3px solid gray;    
+    font-size: 10px;
+    background-color: #D8D6D6;
+
+    }
+
+.col_new{
+    background-color: #F3EFEF;  
+      
+ }
 
 
