@@ -165,9 +165,7 @@
           }
 
           function editar_producto(){    
-
-          $('#form_data').submit(function(e){
-            e.preventDefault();
+            alert("Data en funcion");            
                 let ed_rep = "{{route('ed_rep')}}";                              
                 var producto = $('#producto').val();
                 var descripcion = $('#descripcion').val();
@@ -178,7 +176,6 @@
 
                 data=[producto,descripcion,cantidad,precio]; 
                 
-                alert("Data en funcion"+data);
                                 
                 $.ajax({
                       headers: {
@@ -195,20 +192,13 @@
                       type:'POST',                 
                       success:function(data){     
                         table.ajax.reload();         
-                        clear();    
-                        alert("Datos Actualizados");   
-                        
+                        clear();                            
                     },
                       error: function() {
                     alert('There was some error performing the AJAX call#23!');
-                  }                 
-                  
-                });    
-                  
-            });   
-}
-
-           
+                  }                                   
+                });                 
+              }          
            
         function clear(){
           $('#producto').val('');

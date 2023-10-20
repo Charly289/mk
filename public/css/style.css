@@ -39,7 +39,7 @@ font-size: 12px;
   padding-top: 10px;
 }
 .title{
-font-size: 20px;
+font-size: 30px;
 
 }
 .div_form{
@@ -83,7 +83,7 @@ height: 100px;
     width: 100%;
     border-collapse: collapse;
     border: 3px solid gray;    
-    font-size: 10px;
+    font-size: 15px;
     background-color: #D8D6D6;
 
     }
