@@ -58,6 +58,9 @@
                             <label class="form-label">Precio</label>
                             <input type="number" class="form-control" id="precio" name="precio" placeholder="Precio" value="" required>
                           </div>
+                          <div >
+                            <input type="number" class="form-control" id="id" name="id"  value="" hidden>
+                          </div>
                         </div>
                         <div class="d-grid gap-2 col-6 mx-auto button_form">                      
                           </div>
@@ -126,15 +129,15 @@
     <script type="text/javascript">  
          
           function add_pro(){
-            $('#form_data').submit(function(e){
-                  e.preventDefault();
+            $('#form_data').on('click', function(){              
 
-                let registrar = "{{route('registrar')}}";          
                 var producto = $('#producto').val();
                 var descripcion = $('#descripcion').val();
                 var cantidad = $('#cantidad').val();
                 var precio = $('#precio').val();
-                var table = $('#productos-table').DataTable();
+                var table = $('#productos-table').DataTable();                
+                let registrar = "{{route('registrar')}}";     
+                
 
                     $.ajax({
                       headers: {
@@ -164,21 +167,35 @@
             
           }
 
-          function editar_producto(){    
+          var editar=function(tbody, table){
+          $(tbody).on("click", "button.editar", function(){
+              var data=table.row($(this).parents("tr")).data();
+                  var id=$("#id").val(data.id),
+                      producto=$("#producto").val(data.producto),
+                      descripcion=$("#descripcion").val(data.descripcion),
+                      cantidad=$("#cantidad").val(data.cantidad),
+                      precio=$("#precio").val(data.precio);                                
+                      //console.table(data);
+                  
+          });
 
-          $('#form_data').submit(function(e){
-            e.preventDefault();
-                let ed_rep = "{{route('ed_rep')}}";                              
+        }
+
+          function editar_producto(){             
+
+          $('#form_data').on('click',function(){
+            
+                let ed_rep = "{{route('ed_rep')}}";
+                var id = $('#id').val();                              
                 var producto = $('#producto').val();
                 var descripcion = $('#descripcion').val();
                 var cantidad = $('#cantidad').val();
                 var precio = $('#precio').val();
                 var table = $('#productos-table').DataTable();
 
-
-                data=[producto,descripcion,cantidad,precio]; 
+                datap=[id,producto,descripcion,cantidad,precio]; 
                 
-                alert("Data en funcion"+data);
+                alert("Data en funcion"+datap);
                                 
                 $.ajax({
                       headers: {
@@ -187,17 +204,19 @@
                                         
                       url:"{{route('ed_rep')}}",
                       data: {
+                        id:id,
                         producto:producto,
                         descripcion:descripcion,
                         cantidad:cantidad,
                         precio:precio
                       },
                       type:'POST',                 
-                      success:function(data){     
+                      success:function(respuesta){  
+                     
                         table.ajax.reload();         
-                        clear();    
-                        alert("Datos Actualizados");   
-                        
+                        alert("Datos Actualizados");                                                
+                        clear();  
+                          
                     },
                       error: function() {
                     alert('There was some error performing the AJAX call#23!');
@@ -217,18 +236,7 @@
           $('#precio').val('');
         }
 
-        var editar=function(tbody, table){
-          $(tbody).on("click", "button.editar", function(){
-              var data=table.row($(this).parents("tr")).data();
-                  var producto=$("#producto").val(data.producto),
-                      descripcion=$("#descripcion").val(data.descripcion),
-                      cantidad=$("#cantidad").val(data.cantidad),
-                      precio=$("#precio").val(data.precio);                      
-
-                  
-          });
-
-        }
+        
 
        
     </script>

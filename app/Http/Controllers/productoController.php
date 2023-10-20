@@ -40,17 +40,26 @@ class productoController extends Controller
     }
 
     function editar_reporte(Request $request){ 
+        
+        $id = $request->input('id');
+        $producto = $request->input('producto');
+        $descripcion = $request->input('descripcion');
+        $cantidad = $request->input('cantidad');
+        $precio = $request->input('precio');
 
-        $prod = new products();
-        $prod->producto =$request->input('producto');
-        $prod->descripcion =$request->input('descripcion');
-        $prod->cantidad =$request->input('cantidad');
-        $prod->precio =$request->input('precio');
-        $prod->save();   
+         $prodAct=products::findOrNew($id);
 
-        $respuesta = ['success' => true, 'message' => 'Producto Actualizado','folio'=>$prod];
-        return $respuesta;
+         $prodAct->id = $request->id;
+         $prodAct->producto = $request->producto;
+         $prodAct->descripcion = $request->producto;
+         $prodAct->cantidad = $request->producto;
+         $prodAct->precio = $request->producto;
 
+         $prodAct->save();
+
+         //$respuesta = ['success' => true, 'message' => 'Producto Actualizado','Producto'];
+        
+         return $respuesta;        
 
     }
 
