@@ -1,5 +1,4 @@
-
-<html>
+<!DOCTYPE html>
     <head>
       <meta name="csrf-token" content="{{ csrf_token() }}">
       <link  href="{{ asset('/css/style.css') }}" rel="stylesheet" />
@@ -129,7 +128,7 @@
     <script type="text/javascript">  
          
           function add_pro(){
-            $('#form_data').on('click', function(){              
+            $('#form_data').submit('click', function(){              
 
                 var producto = $('#producto').val();
                 var descripcion = $('#descripcion').val();
@@ -185,7 +184,7 @@
 
           $('#form_data').on('click',function(){
             
-                let ed_rep = "{{route('ed_rep')}}";
+                //let ed_rep = "{{route('ed_rep')}}";
                 var id = $('#id').val();                              
                 var producto = $('#producto').val();
                 var descripcion = $('#descripcion').val();
@@ -195,14 +194,13 @@
 
                 datap=[id,producto,descripcion,cantidad,precio]; 
                 
-                alert("Data en funcion"+datap);
-                                
                 $.ajax({
                       headers: {
                                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                                 },    
                                         
                       url:"{{route('ed_rep')}}",
+                      type:'POST',
                       data: {
                         id:id,
                         producto:producto,
@@ -210,16 +208,15 @@
                         cantidad:cantidad,
                         precio:precio
                       },
-                      type:'POST',                 
-                      success:function(respuesta){  
-                     
-                        table.ajax.reload();         
-                        alert("Datos Actualizados");                                                
-                        clear();  
-                          
-                    },
+                                      
+                      success:function(response){                       
+                          table.ajax.reload();         
+                          clear();    
+                          alert("Datos Actualizados"); 
+                          console.log(response);                                               
+                        },
                       error: function() {
-                    alert('There was some error performing the AJAX call#23!');
+                    alert('There was some error performing the AJAX call#500!');
                   }                 
                   
                 });    

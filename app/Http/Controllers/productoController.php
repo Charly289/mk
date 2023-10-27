@@ -14,52 +14,41 @@ use Response;
 
 class productoController extends Controller
 {    
-    function registrar(Request $request){     
+    function registrar(Request $request){
         
         $prod = new products();
         $prod->producto =$request->input('producto');
         $prod->descripcion =$request->input('descripcion');
         $prod->cantidad =$request->input('cantidad');
         $prod->precio =$request->input('precio');
-        $prod->save();
+        $prod->save();       
         
         //return response()->json([$request]);
         $productos = products::all();
 
         return products::all();                    
-
     }    
-
 
     function productos_data(Request $request){
         if($request->ajax()){
             return datatables()->of(products::all())->tojson();
         }
         return view('market.home');
-
     }
 
-    function editar_reporte(Request $request){ 
-        
-        $id = $request->input('id');
-        $producto = $request->input('producto');
-        $descripcion = $request->input('descripcion');
-        $cantidad = $request->input('cantidad');
-        $precio = $request->input('precio');
+    function editar_reporte(Request $request){  
+     
+        // $prod = new products();
+        // $prod->producto =$request->input('producto');
+        // $prod->descripcion =$request->input('descripcion');
+        // $prod->cantidad =$request->input('cantidad');
+        // $prod->precio =$request->input('precio');
+        // $prod->save();
 
-         $prodAct=products::findOrNew($id);
+        $data = 150505;
 
-         $prodAct->id = $request->id;
-         $prodAct->producto = $request->producto;
-         $prodAct->descripcion = $request->producto;
-         $prodAct->cantidad = $request->producto;
-         $prodAct->precio = $request->producto;
-
-         $prodAct->save();
-
-         //$respuesta = ['success' => true, 'message' => 'Producto Actualizado','Producto'];
-        
-         return $respuesta;        
+        dd($data);
+        return $data;
 
     }
 
