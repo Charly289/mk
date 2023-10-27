@@ -1,6 +1,7 @@
 <!DOCTYPE html>
     <head>
       <meta name="csrf-token" content="{{ csrf_token() }}">
+     
       <link  href="{{ asset('/css/style.css') }}" rel="stylesheet" />
 
       <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
@@ -66,9 +67,9 @@
                         </div> 
                         <div class="container">
                             <button type="submit" class="btn btn-primary mx-auto d-block" id="btn_add" onclick="add_pro();">Agregar</button>
-                            <button class="btn btn-primary mx-auto d-block" id="btn_ed" onclick="editar_producto();">Editar</button>                     
+                            <a class="btn btn-primary mx-auto d-block" id="btn_ed" onclick="editar_producto();">Editar</a>                     
                           </div>                       
-                        
+                          
                     </form>
                     </div>
                       <div class="col_der" id="productos">3
@@ -102,7 +103,7 @@
                                               {data:'cantidad'},
                                               {data:'precio'},
                                               {defaultContent: '<button  type="button" class="editar btn btn-primary btn-sm" id="ed_rep">Editar</button>'},
-                                              {defaultContent: '<a href="{{route('del_rep')}}"  class="btn btn-danger btn-sm" id="del_rep" value="">Eliminar</a>'},                                      
+                                              {defaultContent: '<button  type="button" class="delete btn btn-danger btn-sm" id="del_rep" onclick="del_rep();">Eliminar</button>'}
                                               ],                                              
                                           
                                                });
@@ -180,6 +181,8 @@
 
         }
 
+   
+
           function editar_producto(){             
 
           $('#form_data').on('click',function(){
@@ -200,7 +203,7 @@
                                 },    
                                         
                       url:"{{route('ed_rep')}}",
-                      type:'POST',
+                      type:'GET',
                       data: {
                         id:id,
                         producto:producto,
@@ -209,11 +212,12 @@
                         precio:precio
                       },
                                       
-                      success:function(response){                       
+                      success:function(response){      
+                        var res=response;                 
                           table.ajax.reload();         
                           clear();    
                           alert("Datos Actualizados"); 
-                          console.log(response);                                               
+                          console.log(res);                                               
                         },
                       error: function() {
                     alert('There was some error performing the AJAX call#500!');
@@ -223,6 +227,19 @@
                   
             });   
 }
+
+
+
+function del_rep(){   
+  alert("Data en Delete");
+}
+
+var delete=function(){
+          $(tbody).on("click", "button.delete", function(){
+            var data_del=table.row($(this).parents("tr")).data();
+            var id=$("#id").val(data.id),
+          });
+        }
 
            
            

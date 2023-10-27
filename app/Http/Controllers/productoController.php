@@ -26,7 +26,7 @@ class productoController extends Controller
         //return response()->json([$request]);
         $productos = products::all();
 
-        return products::all();                    
+        return view('market.home');                    
     }    
 
     function productos_data(Request $request){
@@ -36,24 +36,20 @@ class productoController extends Controller
         return view('market.home');
     }
 
-    function editar_reporte(Request $request){  
-     
-        // $prod = new products();
-        // $prod->producto =$request->input('producto');
-        // $prod->descripcion =$request->input('descripcion');
-        // $prod->cantidad =$request->input('cantidad');
-        // $prod->precio =$request->input('precio');
-        // $prod->save();
-
-        $data = 150505;
-
-        dd($data);
-        return $data;
-
+    function editar_reporte(Request $request){ 
+        $id=$request->id;
+        $prod = products::find($id);
+        $prod->producto =$request->input('producto');
+        $prod->descripcion =$request->input('descripcion');
+        $prod->cantidad =$request->input('cantidad');
+        $prod->precio =$request->input('precio');
+        $prod->save();
     }
 
     function del_rep(Request $request){
-       
+        $id=$request->id;
+        $prod = products::find($id);
+        $prod->delete();
     }
 
        
