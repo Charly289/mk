@@ -165,7 +165,7 @@
           }
 
           function editar_producto(){    
-            alert("Data en funcion");            
+                           
                 let ed_rep = "{{route('ed_rep')}}";                              
                 var producto = $('#producto').val();
                 var descripcion = $('#descripcion').val();
@@ -190,9 +190,11 @@
                         precio:precio
                       },
                       type:'POST',                 
-                      success:function(data){     
+                      success:function(data){  
+                        console.log(data);
                         table.ajax.reload();         
-                        clear();                            
+                        clear();    
+                        alert("Datos Actualizados");   
                     },
                       error: function() {
                     alert('There was some error performing the AJAX call#23!');
