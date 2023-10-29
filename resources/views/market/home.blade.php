@@ -1,7 +1,7 @@
-
-<html>
+<!DOCTYPE html>
     <head>
       <meta name="csrf-token" content="{{ csrf_token() }}">
+     
       <link  href="{{ asset('/css/style.css') }}" rel="stylesheet" />
 
       <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
@@ -64,9 +64,9 @@
                         </div> 
                         <div class="container">
                             <button type="submit" class="btn btn-primary mx-auto d-block" id="btn_add" onclick="add_pro();">Agregar</button>
-                            <button class="btn btn-primary mx-auto d-block" id="btn_ed" onclick="editar_producto();">Editar</button>                     
+                            <a class="btn btn-primary mx-auto d-block" id="btn_ed" onclick="editar_producto();">Editar</a>                     
                           </div>                       
-                        
+                          
                     </form>
                     </div>
                       <div class="col_der" id="productos">3
@@ -100,7 +100,7 @@
                                               {data:'cantidad'},
                                               {data:'precio'},
                                               {defaultContent: '<button  type="button" class="editar btn btn-primary btn-sm" id="ed_rep">Editar</button>'},
-                                              {defaultContent: '<a href="{{route('del_rep')}}"  class="btn btn-danger btn-sm" id="del_rep" value="">Eliminar</a>'},                                      
+                                              {defaultContent: '<button  type="button" class="delete btn btn-danger btn-sm" id="del_rep" onclick="del_rep();">Eliminar</button>'}
                                               ],                                              
                                           
                                                });
@@ -126,8 +126,7 @@
     <script type="text/javascript">  
          
           function add_pro(){
-            $('#form_data').submit(function(e){
-                  e.preventDefault();
+            $('#form_data').on('click', function(){              
 
                 let registrar = "{{route('registrar')}}";          
                 var producto = $('#producto').val();
@@ -164,18 +163,35 @@
             
           }
 
-          function editar_producto(){    
-                           
-                let ed_rep = "{{route('ed_rep')}}";                              
+          var editar=function(tbody, table){
+          $(tbody).on("click", "button.editar", function(){
+              var data=table.row($(this).parents("tr")).data();
+                  var id=$("#id").val(data.id),
+                      producto=$("#producto").val(data.producto),
+                      descripcion=$("#descripcion").val(data.descripcion),
+                      cantidad=$("#cantidad").val(data.cantidad),
+                      precio=$("#precio").val(data.precio);                                
+                      //console.table(data);
+                  
+          });
+
+        }
+
+          function editar_producto(){             
+
+          $('#form_data').on('click',function(){
+            
+                let ed_rep = "{{route('ed_rep')}}";
+                var id = $('#id').val();                              
                 var producto = $('#producto').val();
                 var descripcion = $('#descripcion').val();
                 var cantidad = $('#cantidad').val();
                 var precio = $('#precio').val();
                 var table = $('#productos-table').DataTable();
 
-
-                data=[producto,descripcion,cantidad,precio]; 
+                datap=[id,producto,descripcion,cantidad,precio]; 
                 
+                alert("Data en funcion"+datap);
                                 
                 $.ajax({
                       headers: {
@@ -183,6 +199,7 @@
                                 },    
                                         
                       url:"{{route('ed_rep')}}",
+                      type:'GET',
                       data: {
                         producto:producto,
                         descripcion:descripcion,
@@ -190,17 +207,23 @@
                         precio:precio
                       },
                       type:'POST',                 
-                      success:function(data){  
-                        console.log(data);
+                      success:function(respuesta){  
+                     
                         table.ajax.reload();         
-                        clear();    
-                        alert("Datos Actualizados");   
+                        alert("Datos Actualizados");                                                
+                        clear();  
+                          
                     },
                       error: function() {
                     alert('There was some error performing the AJAX call#23!');
-                  }                                   
-                });                 
-              }          
+                  }                 
+                  
+                });    
+                  
+            });   
+}
+
+           
            
         function clear(){
           $('#producto').val('');

@@ -14,29 +14,26 @@ use Response;
 
 class productoController extends Controller
 {    
-    function registrar(Request $request){     
+    function registrar(Request $request){
         
         $prod = new products();
         $prod->producto =$request->input('producto');
         $prod->descripcion =$request->input('descripcion');
         $prod->cantidad =$request->input('cantidad');
         $prod->precio =$request->input('precio');
-        $prod->save();
+        $prod->save();       
         
         //return response()->json([$request]);
         $productos = products::all();
 
-        return products::all();                    
-
+        return view('market.home');                    
     }    
-
 
     function productos_data(Request $request){
         if($request->ajax()){
             return datatables()->of(products::all())->tojson();
         }
         return view('market.home');
-
     }
 
     function editar_reporte(Request $request){ 
@@ -48,7 +45,7 @@ class productoController extends Controller
         $precio = $request->input('precio');
 
          $prodAct=products::findOrNew($id);
-     
+
          $prodAct->id = $request->id;
          $prodAct->producto = $request->producto;
          $prodAct->descripcion = $request->producto;
@@ -59,12 +56,14 @@ class productoController extends Controller
 
          //$respuesta = ['success' => true, 'message' => 'Producto Actualizado','Producto'];
         
-         return $prodAct;        
+         return $respuesta;        
 
     }
 
     function del_rep(Request $request){
-       
+        $id=$request->id;
+        $prod = products::find($id);
+        $prod->delete();
     }
 
        
